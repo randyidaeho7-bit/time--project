@@ -5,91 +5,81 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Cloud Run: Run/Debug Locally",
-            "type": "cloudcode.cloudrun",
-            "request": "launch",
-            "build": {
-                "docker": {
-                    "path": "Dockerfile"
-                }
-            },
-            "image": "${workspaceFolderBasename}",
-            "service": {
-                "name": "${workspaceFolderBasename}",
-                "containerPort": 8080,
-                "resources": {
-                    "limits": {
-                        "memory": "256Mi"
-                    }
-                }
-            },
-            "target": {
-                "minikube": {}
-            },
-            "watch": true
+            "name": "Connect to server",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "remotePath": "${workspaceFolder}",
+            "port": 2345,
+            "host": "127.0.0.1"
         },
+
         {
-            "name": "Cloud Run: Run/Debug Locally",
-            "type": "cloudcode.cloudrun",
-            "request": "launch",
-            "build": {
-                "docker": {
-                    "path": "Dockerfile"
-                }
-            },
-            "image": "${workspaceFolderBasename}",
-            "service": {
-                "name": "${workspaceFolderBasename}",
-                "containerPort": 8080,
-                "resources": {
-                    "limits": {
-                        "memory": "256Mi"
-                    }
-                }
-            },
-            "target": {
-                "minikube": {}
-            },
-            "watch": true
-        },
-    {
-        "name": "Cloud Run: Run/Debug Locally",
-        "type": "cloudcode.cloudrun",
-        "request": "launch",
-        "build": {
-            "docker": {
-                "path": "Dockerfile"
-            }
-        },
-        "image": "${workspaceFolderBasename}",
-        "service": {
-            "name": "${workspaceFolderBasename}",
-            "containerPort": 8080,
-            "resources": {
-                "limits": {
-                    "memory": "256Mi"
-                }
-            }
-        },
-        "target": {
-            "minikube": {}
-        },
-        "watch": true
-    },
-        {
-            "name": "Kubernetes: Run/Debug",
+            "name": "Attach to Kubernetes Pod (Go)",
             "type": "cloudcode.kubernetes",
-            "request": "launch",
-            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-            "watch": true,
-            "cleanUp": true,
-            "portForward": true
+            "request": "attach",
+            "language": "Go",
+            "debugPort": 2345,
+            "podSelector": {
+                "app": "deployment-name"
+            },
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "Path to the Remote Directory Containing the Program"
         },
         {
             "command": "npm start",
             "name": "Run npm start",
             "request": "launch",
             "type": "node-terminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/$TIMEŒ-App/src/app.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
         },
         {
             "name": "Attach to Chrome",
@@ -110,7 +100,6 @@
             "request": "launch",
             "type": "extensionHost"
         },
-
         {
             "name": "Attach by Process ID",
             "processId": "${command:PickProcess}",
@@ -165,33 +154,6 @@
                 "<node_internals>/**"
             ],
             "type": "node"
-        },
-        {
-            "name": "Attach",
-            "port": 9229,
-            "request": "attach",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node"
-        },
-        {
-            "command": "npm start",
-            "name": "Run npm start",
-            "request": "launch",
-            "type": "node-terminal"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/$TIMEŒ-App/src/app.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
         }
     ]
 }
