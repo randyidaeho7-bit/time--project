@@ -1,19 +1,16 @@
 {
   "name": "time-app",
   "version": "1.0.0",
-  "description": "A user-friendly application that leverages the $TIMEŒ Engine for temporal reasoning, causality detection, and counterfactual simulation.",
-  "main": "src/app.ts",
-  "scripts": {
-    "start": "ts-node src/app.ts",
-    "build": "tsc",
-    "test": "jest"
-  },
+  "description": "A user-friendly application that leverag
+  
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "express": "^4.17.1"
   },
-  "devDependencies": {
+  "devDependencies": {cd ../$TIMEŒ-App
+  npm install
+
     "typescript": "^4.4.3",
     "ts-node": "^10.4.0",
     "jest": "^27.0.6",
