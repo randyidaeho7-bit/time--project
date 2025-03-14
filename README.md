@@ -10,7 +10,8 @@ The $TIMEŒ Project is a comprehensive solution designed to leverage causal AI f
 
 The $TIMEŒ Engine is the core computational engine that processes temporal data, identifies causal relationships, and performs counterfactual simulations. It provides a robust framework for understanding how different variables interact over time and allows users to explore "what-if" scenarios.
 
-#### Features:
+#### Key Features
+
 - Temporal reasoning capabilities to track and interpret time-stamped data.
 - Causality detection to identify true causal relationships and filter out spurious correlations.
 - Counterfactual simulation to explore alternate scenarios based on variable adjustments.
@@ -19,7 +20,8 @@ The $TIMEŒ Engine is the core computational engine that processes temporal data
 
 The $TIMEŒ App is a user-friendly interface that allows users to interact with the $TIMEŒ Engine. It provides visualizations and tools for analyzing temporal data, understanding causal relationships, and simulating different scenarios.
 
-#### Features:
+#### Features
+
 - Intuitive dashboard for visualizing timelines and causal relationships.
 - Interactive components for running analyses and exploring counterfactuals.
 - Real-time data input and processing capabilities.
@@ -29,35 +31,56 @@ The $TIMEŒ App is a user-friendly interface that allows users to interact with 
 To set up the $TIMEŒ Project, follow these steps:
 
 1. Clone the repository:
-   ```
+
+   ```bash
    git clone <repository-url>
-   ```
+   ```bash
 
 2. Navigate to the $TIMEŒ-Engine directory and install dependencies:
-   ```
+
+   ```bash
    cd $TIMEŒ-Engine
    npm install
-   ```
+   ```bash
 
 3. Navigate to the $TIMEŒ-App directory and install dependencies:
-   ```
+
+   ```bash
    cd ../$TIMEŒ-App
    npm install
    ```
 
 4. Start the $TIMEŒ Engine:
-   ```
+
+   ```bash
    npm start
    ```
 
-5. Start the $TIMEŒ App:
+   ```bash
+   cd ../$TIMEŒ-App
+   npm install
    ```
+
+4. Start the $TIMEŒ Engine:
+
+   ```bash
+   npm start
+   ```
+
+To run the tests for the $TIMEŒ Project, use the following command:
+
+   ```bash
+   npm start
+   ```
+
+   ```bash
    npm start
    ```
 
 ## Running Tests
 
 To run the tests for the $TIMEŒ Project, use the following command:
+
 ```
 npm test
 ```
