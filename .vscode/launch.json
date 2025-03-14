@@ -5,6 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Connect to server",
+            "type": "go",
+            "request": "attach",
+            "mode": "remote",
+            "remotePath": "${workspaceFolder}",
+            "port": 2345,
+            "host": "127.0.0.1"
+        },
+
+        {
+            "name": "Attach to Kubernetes Pod (Go)",
+            "type": "cloudcode.kubernetes",
+            "request": "attach",
+            "language": "Go",
+            "debugPort": 2345,
+            "podSelector": {
+                "app": "deployment-name"
+            },
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "Path to the Remote Directory Containing the Program"
+        },
+        {
             "command": "npm start",
             "name": "Run npm start",
             "request": "launch",
