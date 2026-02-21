@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EdoHistoricalEvent {
+  id            String    @id @default(uuid())
+  eventType     String    // "land_change", "migration", "cultural_shift", "urban_growth"
+  description   String
+  startDate     DateTime
+  endDate       DateTime?
+  locationGeom  Unsupported("geometry(Point,4326)")?  // e.g., Benin City coord
+  sourceDocs    Json[]    // array of {url, desc} for uploads/photos
+  contributorId String?   // diaspora user who uploaded
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([startDate])
+}
+
+model LandParcelHistory {
+  id              String    @id @default(uuid())
+  parcelId        String    // unique Edo land ID (mock from public data)
+  geom            Unsupported("geometry(Polygon,4326)")?  // boundaries
+  ownershipChain  Json[]    // [{owner: "John Doe", from: "1920-01-01", to: "1950-12-31"}]
+  useTypeHistory  Json[]    // [{type: "farm", from: "1920", changes: "urbanized 1990"}]
+  disputes        Json[]    // array of dispute timestamps/reasons
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([parcelId])
+}
+
+model MigrationPattern {
+  id            String    @id @default(uuid())
+  fromLga       String    // Edo LGA e.g. "Oredo"
+  toLocation    String    // "NYC, US" for diaspora
+  migrantCount  Int?
+  startYear     Int
+  endYear       Int?
+  reasons       Json[]    // ["economic", "education"]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([startYear])
+}
+
+// Hypertable for time-series (TimescaleDB)
+// Convert LandParcelHistory to hypertable later via SQL
