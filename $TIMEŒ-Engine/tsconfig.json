@@ -43,3 +43,16 @@ async function simulateExtension(cOfONumber: string) {
   // Run through your $TIMEŒ counterfactual sim here...
   // e.g. engine.simulate({ original: originalExpiry, alt: simulatedExpiry, impact: "stability_score" })
 }
+import { Pool } from 'pg';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+export async function querySpatialChanges(bbox: string) {  // bbox e.g. "lat1,lon1,lat2,lon2"
+  const query = `
+    SELECT * FROM "LandParcelHistory"
+    WHERE ST_Intersects(geom, ST_MakeEnvelope(${bbox}, 4326))
+    ORDER BY "updatedAt" DESC;
+  `;
+  const result = await pool.query(query);
+  return result.rows;
+}
