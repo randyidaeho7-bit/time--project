@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  // e.g. postgres://user:pass@localhost:5432/edo_time
+}
+
+model EdoUser {
+  id            String    @id @default(uuid())
+  diasporaId    String?   // link to US/NY diaspora profile
+  edoOriginLga  String?   // Local Govt Area e.g. Oredo, Egor
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model CertificateOfOccupancy {
+  id              String    @id @default(uuid())
+  cOfONumber      String    @unique
+  ownerId         String
+  owner           EdoUser   @relation(fields: [ownerId], references: [id])
+  parcelGeom      Unsupported("geometry(Polygon,4326)")?
+  issueDate       DateTime
+  expiryDate      DateTime?
+  status          String    // "active", "disputed", "revoked"
+  statusHistory   Json[]    // array of {date, status, reason}
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model AgroProductPrice {
+  id          String   @id @default(uuid())
+  crop        String   // "yam", "cassava", "palm oil"
+  market      String   // "New Benin Market", "Sapele"
+  priceNgn    Float
+  unit        String   // "basket", "kg"
+  recordedAt  DateTime
+  source      String?  // "farmer report", "market survey"
+}
+
+model RemittanceFlow {
+  id              String   @id @default(uuid())
+  senderId        String
+  sender          EdoUser  @relation(fields: [senderId], references: [id])
+  amountUsd       Float
+  amountNgn       Float?
+  receivedAt      DateTime
+  impactDesc      String?  // "funded 2 solar pumps in Ovia North-East"
+  projectLink     String?
+}
+
+// Add indexes for fast time queries
+@@index([recordedAt])
+@@index([issueDate])
