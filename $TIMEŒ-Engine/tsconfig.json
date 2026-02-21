@@ -17,3 +17,29 @@
     "**/*.spec.ts"
   ]
 }
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+// Example: query historical land changes
+async function getLandHistory(cOfONumber: string) {
+  const record = await prisma.certificateOfOccupancy.findUnique({
+    where: { cOfONumber },
+    select: { statusHistory: true, issueDate: true, expiryDate: true }
+  });
+  // Feed statusHistory timestamps into your causal engine for analysis
+  return record;
+}
+
+// Counterfactual example: "what if expiry was extended 5 years?"
+async function simulateExtension(cOfONumber: string) {
+  const record = await prisma.certificateOfOccupancy.findUnique({ where: { cOfONumber } });
+  if (!record) return null;
+
+  const originalExpiry = record.expiryDate;
+  const simulatedExpiry = new Date(originalExpiry);
+  simulatedExpiry.setFullYear(simulatedExpiry.getFullYear() + 5);
+
+  // Run through your $TIMEŒ counterfactual sim here...
+  // e.g. engine.simulate({ original: originalExpiry, alt: simulatedExpiry, impact: "stability_score" })
+}
